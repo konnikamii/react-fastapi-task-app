@@ -116,20 +116,20 @@ cp .env.example .env
 #### 3. Make new directories for the named volumes:
 
 ```bash
-mkdir venv
 mkdir website/logger/logs
+``` 
+
+#### 4. Install Python dependencies using pip: (you need those to generate keys, but can remove later)
+
+```bash
+python -m venv venv 
+pip install -r requirements.txt
 ```
 
-#### 4. Generate PEM keypair:
+#### 5. Generate PEM keypair: (*Make sure you select the correct python interpreter, ./venv/Scripts/python.exe)
 
 ```bash
 python ./keys/generatePEMKeypair.py
-```
-
-#### 5. Install Python dependencies using pip: (only if running locally)
-
-```bash
-pip install -r requirements.txt
 ```
 
 #### 6. Run database migrations: (only if running locally)
