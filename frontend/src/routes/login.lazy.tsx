@@ -126,14 +126,7 @@ function Login() {
         >
           <div className="w-full flex flex-col items-center py-6 font-bold text-3xl">
             Login
-          </div>
-          <div onClick={() => {
-                    setValues((prev) => ({
-                      ...prev,
-                      username: 'konnik',
-                      password: 'qwerty123',
-                    }));
-          }}>demo</div>
+          </div> 
           <div className="flex flex-col gap-3 mb-6">
             <div className="relative size-full">
               <div

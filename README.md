@@ -123,22 +123,29 @@ mkdir website/logger/logs
 
 ```bash
 python -m venv venv 
-pip install -r requirements.txt
+.\venv\Scripts\activate                   # activate environment (*Make sure you select the correct python interpreter)
+pip install cryptography python-dotenv
 ```
 
-#### 5. Generate PEM keypair: (*Make sure you select the correct python interpreter, ./venv/Scripts/python.exe)
+#### 5. Generate PEM keypair: 
 
 ```bash
 python ./keys/generatePEMKeypair.py
 ```
 
-#### 6. Run database migrations: (only if running locally)
+#### 6. Install Python dependencies using pip: (only if running locally)
+
+```bash
+pip install -r requirements.txt
+```
+
+#### 7. Run database migrations: (only if running locally)
 
 ```bash
 alembic upgrade head
 ```
 
-#### 7. Start the Uvicorn development server: (only if running locally)
+#### 8. Start the Uvicorn development server: (only if running locally)
 
 ```bash
 uvicorn website.main:app --reload
