@@ -1,0 +1,18 @@
+FROM python:latest
+ 
+# Set working directory
+WORKDIR /usr/src/app
+  
+# Install dependencies
+COPY requirements.txt ./
+ 
+  
+# Install dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy project files
+COPY . .
+
+# Expose port and start the application
+EXPOSE 8000 
+CMD ["sh", "-c", "alembic upgrade head && uvicorn website.main:app --port 8000 --host 0.0.0.0"]

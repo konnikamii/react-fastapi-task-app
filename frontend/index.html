@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Taskify is the ultimate task management platform to track, analyze, and improve your task management skills. Join our community to discover more!">
+    <meta name="keywords" content="task manager, task web app, task analyzer">
+    <meta name="author" content="Trades To Trade">
+    <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+    <link rel="canonical" href="%VITE_MAIN_DOMAIN%">
+    <title>Taskify - The Ultimate Task Manager</title>
+    <link rel="stylesheet" href="./src/css/index.css" /> 
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" /> 
+          
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Taskify - The Ultimate Task Manager" />
+    <meta property="og:description" content="Taskify is the ultimate task management platform to track, analyze, and improve your task management skills. Join our community to discover more!" />
+    <meta property="og:image" content="%VITE_MAIN_DOMAIN%/logoImage.png" />
+    <meta property="og:url" content="%VITE_MAIN_DOMAIN%" />
+    <meta property="og:type" content="website" />
+
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Taskify - The Ultimate Task Manager" />
+    <meta name="twitter:description" content="Taskify is the ultimate task management platform to track, analyze, and improve your task management skills. Join our community to discover more!" />
+    <meta name="twitter:image" content="%VITE_MAIN_DOMAIN%/logoImage.png" />
+    <script> 
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+    </script>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','%VITE_GTM_ID%');</script> 
+    <!-- Initialize Consent -->
+    <script> 
+      const storedConsentData = window.localStorage.getItem('ucData')
+      if (storedConsentData){
+        const parsedConsentData = JSON.parse(storedConsentData)
+        gtag('consent', 'default', parsedConsentData)
+      } else {
+        gtag('consent', 'default', {
+          'ad_storage': 'denied',
+          'analytics_storage': 'denied',
+          'ad_user_data': 'denied',
+          'ad_personalization': 'denied',
+          'personalization_storage': 'denied',
+          'functionality_storage': 'denied',
+          'security_storage': 'denied',
+        } );  
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

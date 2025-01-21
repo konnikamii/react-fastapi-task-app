@@ -1,0 +1,26 @@
+# Ignore environment files
+*.env
+*.env.local
+*.env.development
+*.env.production
+*.env.test
+
+# Ignore installed packages
+node_modules 
+
+# Ignore log files and temporary files
+logs 
+*.log
+
+# Ignore builds
+dist
+dist-server
+
+# Ignore IDE and editor files 
+.vscode 
+
+# Ignore Docker-related files
+Dockerfile*
+docker-compose*.yml
+docker-compose*.yaml
+   

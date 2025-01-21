@@ -1,0 +1,635 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Alkatra:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Pacifico:wght@400;600;700&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color: #003366;
+  --secondary-color: #004080;
+  --tertiary-color: #ffa500;
+  --quaternary-color: #f0f8ff;
+  scrollbar-width: thin;
+  user-select: none;
+}
+/* This applies to all child el so can del other ones */
+#root * {
+  scrollbar-width: thin;
+}
+.ant-modal-wrap {
+  scrollbar-width: thin;
+}
+.ant-modal-content * {
+  scrollbar-width: thin;
+}
+.ant-select-dropdown * {
+  scrollbar-width: thin;
+}
+.ant-picker-dropdown * {
+  scrollbar-width: thin;
+}
+body {
+  font-family: "Roboto", sans-serif;
+}
+
+/* #region Navbar */
+@keyframes slideAndBack {
+  0% {
+    transform: translateX(0px);
+  }
+  70% {
+    transform: translateX(60px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
+.slide-right-and-back {
+  transition-property: transform, opacity; /* Adjust based on actual properties you want to animate */
+  transition-duration: 0.3s; /* Example duration */
+  animation: slideAndBack 0.2s forwards;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(100vw);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+.animate-scroll {
+  animation: scroll 140s linear infinite;
+}
+@keyframes scaleUpSides {
+  0%,
+  40%,
+  60%,
+  100% {
+    transform: scale(1, 1);
+  }
+  50% {
+    transform: scale(1.5, 1);
+  }
+}
+.scaling-up-side {
+  animation: scaleUpSides 20s infinite ease-in-out;
+}
+/* #endregion */
+
+/* #region Underline */
+.underline-animation::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -2px;
+  left: 0;
+  background-color: currentColor;
+  transform: scaleX(0);
+  visibility: hidden;
+}
+.group:hover .underline-animation::after {
+  transition:
+    transform 0.3s ease-in-out,
+    visibility 0s ease-in-out;
+  transform: scaleX(1);
+  visibility: visible;
+}
+.group-fast:hover .underline-animation::after {
+  transition:
+    transform 0.15s ease-in-out,
+    visibility 0s ease-in-out;
+  transform: scaleX(1);
+  visibility: visible;
+}
+
+.underline-animation-active .underline-animation::after {
+  transition:
+    transform 0.3s ease-in-out,
+    visibility 0s ease-in-out;
+  transform: scaleX(1);
+  visibility: visible;
+}
+/* for filter arrows */
+.specific-group:hover .specific-group-hover {
+  transform: rotate(180deg);
+}
+/* #endregion */
+
+/* #region Sandwich */
+.sandwich-path {
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+  transform-origin: center;
+}
+.sandwich-open .sandwich-path.top {
+  transform: rotate(45deg) translate(1px, 7px);
+}
+.sandwich-open .sandwich-path.middle {
+  opacity: 0;
+}
+.sandwich-open .sandwich-path.bottom {
+  transform: rotate(-45deg) translate(0px, -8px);
+}
+/* #endregion */
+
+/* #region Filter */
+.filter-path {
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+  transform-origin: center;
+}
+.filter-search .filter-path.on {
+  opacity: 0;
+}
+.filter-search .filter-path.off {
+  opacity: 0;
+}
+.filter-search .filter-path.circle {
+  transform: translate(0px, 0px) scale(0.8);
+}
+.filter-search .filter-path.line {
+  opacity: 1;
+}
+
+.filter-off .filter-path.on {
+  opacity: 0;
+}
+.filter-off .filter-path.off {
+  opacity: 1;
+}
+.filter-off .filter-path.circle {
+  transform: translate(0px, 0px) scale(1);
+}
+.filter-off .filter-path.line {
+  opacity: 0;
+}
+
+.filter-on .filter-path.on {
+  opacity: 1;
+}
+.filter-on .filter-path.off {
+  opacity: 0;
+}
+.filter-on .filter-path.circle {
+  transform: translate(0px, 0px) scale(1);
+}
+.filter-on .filter-path.line {
+  opacity: 0;
+}
+/* #endregion*/
+
+/* #region NotesFC*/
+.video-svg {
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
+  transform-origin: center;
+}
+.video-svg.left {
+  opacity: 0;
+}
+.svg-video-container:hover .video-svg.left {
+  transform: translateX(7px);
+  opacity: 1;
+}
+.svg-video-container:hover .video-svg.middle {
+  transform: translateX(7px);
+}
+.svg-video-container:hover .video-svg.right {
+  transform: translateX(7px);
+  opacity: 0;
+}
+/* This sets up placeholder for rich text editor tiptap */
+.tiptap p.is-editor-empty:first-child::before {
+  color: #adb5bd;
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+.tiptap p,
+.tiptap ul,
+.tiptap li,
+.tiptap ol,
+.tiptap h1,
+.tiptap h2,
+.tiptap h3,
+.tiptap h4,
+.tiptap h5,
+.tiptap h6 {
+  margin: 0;
+}
+.tiptap a {
+  cursor: pointer;
+}
+.tiptap h1 {
+  font-size: 2em; /* 32px */
+}
+.tiptap h2 {
+  font-size: 1.5em; /* 24px */
+}
+.tiptap h3 {
+  font-size: 1.17em; /* 18.72px */
+}
+.tiptap h4 {
+  font-size: 1em; /* 16px */
+}
+.tiptap h5 {
+  font-size: 0.83em; /* 13.28px */
+}
+.tiptap h6 {
+  font-size: 0.67em; /* 10.72px */
+}
+.tiptapLight * {
+  color: black;
+}
+.tiptapLight li::marker {
+  color: black;
+}
+.tiptapDark * {
+  color: white;
+}
+.tiptapDark li::marker {
+  color: white;
+}
+.tiptapDark pre {
+  background-color: #0f0f0f;
+}
+/* #endregion */
+
+/* #region Arrows Left Right */
+.left-arrow-svg {
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
+  transform-origin: center;
+}
+.left-arrow-svg.right {
+  opacity: 0;
+  transform: translateX(12px);
+}
+.svg-arrow-container:not(:disabled):hover .left-arrow-svg.left {
+  transform: translateX(-12px);
+  opacity: 0;
+}
+.svg-arrow-container:not(:disabled):hover .left-arrow-svg.right {
+  transform: translateX(0px);
+  opacity: 1;
+}
+.right-arrow-svg {
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
+  transform-origin: center;
+}
+.right-arrow-svg.left {
+  opacity: 0;
+  transform: translateX(-12px);
+}
+.svg-arrow-container:not(:disabled):hover .right-arrow-svg.right {
+  transform: translateX(12px);
+  opacity: 0;
+}
+.svg-arrow-container:not(:disabled):hover .right-arrow-svg.left {
+  transform: translateX(0px);
+  opacity: 1;
+}
+
+.left-dbl-arrow-svg {
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
+  transform-origin: center;
+}
+.left-dbl-arrow-svg.right {
+  opacity: 0;
+  transform: translateX(15px);
+}
+.svg-arrow-container:not(:disabled):hover .left-dbl-arrow-svg.right {
+  transform: translateX(0px);
+  opacity: 1;
+}
+.svg-arrow-container:not(:disabled):hover .left-dbl-arrow-svg.middle {
+  transform: translateX(-12px);
+  opacity: 1;
+}
+.svg-arrow-container:not(:disabled):hover .left-dbl-arrow-svg.left {
+  transform: translateX(-15px);
+  opacity: 0;
+}
+
+.right-dbl-arrow-svg {
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
+  transform-origin: center;
+}
+.right-dbl-arrow-svg.left {
+  opacity: 0;
+  transform: translateX(-15px);
+}
+.svg-arrow-container:not(:disabled):hover .right-dbl-arrow-svg.left {
+  transform: translateX(0px);
+  opacity: 1;
+}
+.svg-arrow-container:not(:disabled):hover .right-dbl-arrow-svg.middle {
+  transform: translateX(12px);
+  opacity: 1;
+}
+.svg-arrow-container:not(:disabled):hover .right-dbl-arrow-svg.right {
+  transform: translateX(15px);
+  opacity: 0;
+}
+/* #endregion*/
+
+/* #region General */
+@keyframes grow-height {
+  0% {
+    max-height: 0;
+  }
+  100% {
+    max-height: 100vh;
+  }
+}
+.animate-grow-height {
+  animation: grow-height 0.5s ease-in-out;
+}
+
+@keyframes slide-in {
+  0% {
+    transform: translateX(-10%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-in {
+  animation: slide-in 0.25s ease-in-out;
+}
+
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+.animate-line-draw {
+  animation: draw 2s forwards ease-in-out;
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: 1000;
+  }
+}
+#chart-wrapper {
+  user-select: none;
+}
+
+@keyframes slideInXLeft {
+  0% {
+    transform: translateX(-25%);
+    opacity: 0;
+    max-width: 90%;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+    max-width: 100%;
+  }
+}
+
+@keyframes slideOutXRight {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(25%);
+    opacity: 0;
+  }
+}
+
+.slide-in-x-left {
+  animation: slideInXLeft 0.4s forwards;
+}
+
+.slide-out-x-right {
+  animation: slideOutXRight 0.4s forwards;
+}
+/* #endregion */
+
+/* #region Cursor */
+.circle-light {
+  position: absolute;
+  z-index: 10000;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  background: rgb(6, 164, 255);
+  pointer-events: none;
+  animation: ripple 0.2s linear;
+}
+.circle-dark {
+  position: absolute;
+  z-index: 10000;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  background: rgb(6, 125, 194);
+  pointer-events: none;
+  animation: ripple 0.2s linear;
+}
+
+@keyframes ripple {
+  from {
+    transform: scale(0);
+    opacity: 1;
+  }
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+/* #endregion */
+
+/* #region Loader*/
+.loader {
+  display: grid;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  /* border-right-color: black; */
+  animation: spinAnimation 0.5s infinite linear;
+  transition: opacity 0.1s ease-in-out;
+  z-index: 1200;
+}
+.loader::before,
+.loader::after {
+  content: "";
+  grid-area: 1/1;
+  margin: 1px;
+  border: inherit;
+  border-radius: 50%;
+  animation: spinAnimation 1s infinite;
+}
+.loader::after {
+  margin: 4px;
+  animation-duration: 0.5s;
+}
+@keyframes spinAnimation {
+  100% {
+    transform: rotate(1turn);
+  }
+}
+.loader-light {
+  border-right-color: white;
+}
+
+.loader-dark {
+  border-right-color: black;
+}
+/* #endregion*/
+
+/* #region AntD */
+.ant-select-selection-placeholder {
+  font-size: 11px;
+}
+.ant-select-selection-item {
+  font-size: 12px;
+}
+.ant-select-selection-item-content {
+  font-size: 12px;
+}
+.ant-select-item-option-content {
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+}
+.ant-select-arrow {
+  transform: translateY(8%) translateX(50%);
+}
+.ant-select-clear {
+  transform: translateX(50%);
+}
+
+.ant-picker .ant-picker-input input::placeholder {
+  font-size: 12px;
+}
+.ant-picker .ant-picker-input input {
+  font-size: 9px;
+}
+.ant-picker-suffix {
+  transform: translateX(25%);
+}
+.ant-picker-clear .anticon-close-circle {
+  transform: translateX(25%);
+}
+
+.ant-input-number-input::placeholder {
+  font-size: 12px;
+}
+
+/* Larger font size for screens wider than 375px */
+@media (min-width: 375px) {
+  .ant-select-selection-placeholder {
+    font-size: 12px;
+  }
+  .ant-select-selection-item {
+    font-size: 14px;
+  }
+  .ant-select-selection-item-content {
+    font-size: 14px;
+  }
+  .ant-select-item-option-content {
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+  }
+
+  .ant-picker .ant-picker-input input::placeholder {
+    font-size: 14px;
+  }
+  .ant-picker .ant-picker-input input {
+    font-size: 13px;
+  }
+
+  .ant-input-number-input::placeholder {
+    font-size: 14px;
+  }
+}
+
+/* Even larger font size for screens wider than 425px */
+@media (min-width: 425px) {
+  .ant-select-selection-placeholder {
+    font-size: 14px;
+  }
+  .ant-select-selection-item {
+    font-size: 16px;
+  }
+  .ant-select-selection-item-content {
+    font-size: 16px;
+  }
+  .ant-select-item-option-content {
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+  }
+
+  .ant-picker .ant-picker-input input::placeholder {
+    font-size: 16px;
+  }
+  .ant-picker .ant-picker-input input {
+    font-size: 14px;
+  }
+
+  .ant-input-number-input::placeholder {
+    font-size: 16px;
+  }
+}
+
+/* Adjust the font size for screens wider than 768px */
+@media (min-width: 768px) {
+  .ant-select-selection-placeholder {
+    font-size: 16px;
+  }
+  .ant-select-arrow {
+    transform: translateX(0%);
+  }
+  .ant-select-clear {
+    transform: translateX(0%);
+  }
+  .ant-picker-suffix {
+    transform: translateX(0%);
+  }
+  .ant-picker-clear .anticon-close-circle {
+    transform: translateX(0%);
+  }
+}
+/* #endregion*/
+
+/* #region In Construction */
+@keyframes moveUpDown {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(10px); /* Adjust the value as needed */
+  }
+}
+
+.hook-and-rope {
+  animation: moveUpDown 10s infinite ease-in-out; /* Adjust the duration as needed */
+}
+/* #endregion*/

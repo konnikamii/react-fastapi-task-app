@@ -1,0 +1,64 @@
+{
+  "version": 1,
+  "disable_existing_loggers": false,
+  "formatters": {
+    "simple": {
+      "format": "[%(levelname)s|%(module)s|L%(lineno)d] %(asctime)s: %(message)s",
+      "datefmt": "%Y-%m-%dT%H:%M:%S%z"
+    },
+    "json": {
+      "()": "website.logger.mylogger.MyJSONFormatter",
+      "fmt_keys": {
+        "level": "levelname",
+        "message": "message",
+        "timestamp": "timestamp",
+        "logger": "name",
+        "module": "module",
+        "function": "funcName",
+        "line": "lineno",
+        "thread_name": "threadName"
+      }
+    }
+  },
+  "handlers": {
+    "stdout": {
+      "class": "logging.StreamHandler",
+      "level": "DEBUG",
+      "formatter": "simple",
+      "stream": "ext://sys.stdout"
+    },
+    "stderr": {
+      "class": "logging.StreamHandler",
+      "level": "WARNING",
+      "formatter": "simple",
+      "stream": "ext://sys.stderr"
+    },
+    "file_json_debug": {
+      "class": "logging.handlers.RotatingFileHandler",
+      "level": "DEBUG",
+      "formatter": "json",
+      "filename": "website/logger/logs/FASTapiDebug.log.jsonl",
+      "maxBytes": 10000,
+      "backupCount": 3
+    },
+    "file_json_error": {
+      "class": "logging.handlers.RotatingFileHandler",
+      "level": "ERROR",
+      "formatter": "json",
+      "filename": "website/logger/logs/FASTapiError.log.jsonl",
+      "maxBytes": 1000000,
+      "backupCount": 1
+    },
+    "queue_handler": {
+      "class": "logging.handlers.QueueHandler",
+      "handlers": ["stdout", "stderr", "file_json_debug", "file_json_error"],
+      "respect_handler_level": true
+    }
+  },
+  "loggers": {
+    "root": {
+      "level": "INFO",
+      "handlers": ["queue_handler"]
+    }
+  }
+}

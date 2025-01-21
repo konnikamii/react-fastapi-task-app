@@ -1,0 +1,30 @@
+services:
+
+  frontend:
+    image: frontend
+    container_name: frontend
+    restart: unless-stopped 
+    tty: true
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000   
+      - 24678:24678
+    volumes:
+      - .:/app:ro
+      - frontend-node-modules:/app/node_modules
+      - frontend-dist-server:/app/dist-server
+      - frontend-dist:/app/dist
+      - frontend-logs:/app/logs 
+    env_file: ./.env.local  
+    environment:
+     - RUN_ON_DOCKER=on
+     - BACKEND_HOST=backend
+
+volumes:
+  frontend-node-modules:
+  frontend-dist-server:
+  frontend-dist:
+  frontend-logs:
+      

@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color: #003366;
+  --secondary-color: #004080;
+  --tertiary-color: #ffa500;
+  --quaternary-color: hsl(208, 100%, 97%); 
+}
+
+body {
+  background-color: #f0f2f5;
+}

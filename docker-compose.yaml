@@ -1,0 +1,96 @@
+name: ${APP_NAME}
+
+services:
+  frontend:
+    image: ${APP_NAME}/frontend:latest
+    container_name: frontend
+    restart: unless-stopped
+    tty: true
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+      # - 7000:7000
+      - 24678:24678
+    volumes:
+      - ./frontend:/app:ro
+      - frontend-node-modules:/app/node_modules
+      - frontend-dist-server:/app/dist-server
+      - frontend-dist:/app/dist
+      - frontend-logs:/app/logs
+    env_file: 
+      - ./frontend/.env
+    environment:
+      - RUN_ON_DOCKER=on
+      - BACKEND_HOST=backend
+      - VITE_MODE=development
+
+    networks:
+      - app-network
+
+  backend:
+    image: ${APP_NAME}/backend:latest
+    container_name: backend
+    restart: unless-stopped
+    tty: true
+    depends_on:
+      - postgres
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - 8000:8000
+    volumes:
+      - ./backend/:/usr/src/app:ro
+      - backend-venv:/usr/src/app/venv 
+      - backend-logs:/usr/src/app/website/logger/logs
+    env_file: 
+      - ./backend/.env
+    environment:
+      - DATABASE_HOSTNAME=postgres
+      - DATABASE_PORT=5432 
+      - DATABASE_PASSWORD=qwerty123
+      - RUN_ON_DOCKER=on 
+    networks:
+      - app-network
+
+  postgres:
+    image: postgres
+    container_name: postgres 
+    restart: unless-stopped 
+    env_file: 
+      - ./backend/.env
+    environment:
+      - POSTGRES_DB=fastapiTest
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=qwerty123 
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres-db:/var/lib/postgresql/data 
+    networks:
+      - app-network
+
+  mailhog:
+    image: mailhog/mailhog
+    container_name: mailhog
+    restart: unless-stopped
+    ports:
+      - 8025:8025
+      - 1025:1025
+    networks:
+      - app-network
+
+volumes:
+  postgres-db:
+  backend-venv:
+  backend-logs:
+  frontend-node-modules:
+  frontend-dist-server:
+  frontend-dist:
+  frontend-logs:
+
+networks:
+  app-network:
+    driver: bridge

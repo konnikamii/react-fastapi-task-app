@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    /* Server mode */
+    "target": "ESNext",
+    "module": "NodeNext",
+    "useDefineForClassFields": true,
+    "lib": ["ESNext"],
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "moduleResolution": "NodeNext",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+    "esModuleInterop": true,
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "forceConsistentCasingInFileNames": true,
+
+    /* Output */
+    "outDir": "./dist-server",
+    "rootDir": "./"
+  },
+  "include": ["server"],
+  "exclude": ["node_modules"]
+}

@@ -1,0 +1,24 @@
+FROM node:latest
+ 
+# Set working directory
+WORKDIR /app
+
+# this will allow us to run vite and other tools directly
+ENV PATH /app/node_modules/.bin:$PATH
+  
+# Install dependencies
+COPY package*.json ./
+ 
+# Install dependencies
+RUN npm install
+
+# Copy project files
+COPY . .
+
+# Convert the server to .js before running
+RUN tsc --project tsconfig.server.json
+ 
+# Expose port and start the application [dev, prod, hmr]
+EXPOSE 7000
+
+CMD ["sh", "-c", "npm run build && npm run prod --host"]

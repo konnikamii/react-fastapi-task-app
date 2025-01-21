@@ -1,0 +1,28 @@
+# Ignore environment files
+*.env 
+
+# Ignore installed packages
+venv
+
+# Ignore log files and temporary files
+logs 
+*.log
+
+# Ignore tests
+tests
+
+# Ignore cache
+__pycache__
+
+# Ignore builds
+dist
+dist-server
+
+# Ignore IDE and editor files 
+.vscode 
+
+# Ignore Docker-related files
+Dockerfile*
+docker-compose*.yml
+docker-compose*.yaml
+   

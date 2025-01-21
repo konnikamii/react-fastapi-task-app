@@ -1,0 +1,81 @@
+name: ${APP_NAME}-prod
+
+services:
+  frontend:
+    image: ${APP_NAME}-prod/frontend:latest
+    container_name: frontend-prod
+    restart: unless-stopped
+    tty: true
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.prod
+    ports: 
+      - 7000:7000  
+    env_file: 
+      - ./frontend/.env
+    environment:
+      - RUN_ON_DOCKER=on
+      - BACKEND_HOST=backend
+      - VITE_MODE=production
+
+    networks:
+      - app-network
+
+  backend:
+    image: ${APP_NAME}-prod/backend:latest
+    container_name: backend-prod
+    restart: unless-stopped
+    tty: true
+    depends_on:
+      - postgres
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.prod
+    ports:
+      - 8000:8000 
+    env_file: 
+      - ./backend/.env
+    environment:
+      - DATABASE_HOSTNAME=postgres
+      - DATABASE_PORT=5432 
+      - DATABASE_PASSWORD=qwerty123
+      - RUN_ON_DOCKER=on 
+    networks:
+      - app-network
+
+  postgres:
+    image: postgres
+    container_name: postgres-prod
+
+    restart: unless-stopped
+
+    env_file: 
+      - ./backend/.env
+    environment:
+      - POSTGRES_DB=fastapiTest
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=qwerty123 
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres-db:/var/lib/postgresql/data
+
+    networks:
+      - app-network
+
+  mailhog:
+    image: mailhog/mailhog
+    container_name: mailhog-prod
+    restart: unless-stopped
+    ports:
+      - 8025:8025
+      - 1025:1025
+    networks:
+      - app-network
+
+volumes:
+  postgres-db: 
+
+networks:
+  app-network:
+    driver: bridge
