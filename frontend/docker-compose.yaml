@@ -17,7 +17,7 @@ services:
       - frontend-dist-server:/app/dist-server
       - frontend-dist:/app/dist
       - frontend-logs:/app/logs 
-    env_file: ./.env.local  
+    env_file: ./.env
     environment:
      - RUN_ON_DOCKER=on
      - BACKEND_HOST=backend
