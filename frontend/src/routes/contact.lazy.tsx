@@ -100,12 +100,12 @@ function Contact() {
             setLoadingState(false);
           }, 500);
         })
-        .catch((error: AxiosError<string>) => {
+        .catch((error: AxiosError<{detail:string}>) => {
           const res = error.response;
           if (res) {
             console.log(res);
-            messageApi.error(res.data ?? "Validation error");
-            const newErr = res.data;
+            messageApi.error(res.data.detail ?? "Validation error");
+            const newErr = res.data.detail;
             if (newErr.startsWith('Name')) {
               setErrors((prev) => ({ ...prev, name: newErr }));
             } else if (newErr.startsWith('Email')) {
